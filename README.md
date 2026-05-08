@@ -1,0 +1,1 @@
+This package aims to give a visual guide of whether your data fits the statstical model you want use.
