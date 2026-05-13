@@ -1,5 +1,5 @@
-\name{hello}
-\alias{hello}
+\name{simulate_log}
+\alias{simulate_log}
 \title{Hello, World!}
 \usage{
 hello()
