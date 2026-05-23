@@ -1,0 +1,77 @@
+---
+title: "AssumptionPlotter"
+author: "Emma Akrong"
+date: "May 24, 2026"
+vignette: >
+  %\VignetteIndexEntry{AssumptionPlotter}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(AssumptionPlotter)
+```
+
+This package aims to give a an overview of whether the user's data matches the statistical model they intend to use.
+
+While it tests whether the data matches meets the statistical assumptions of the models, it also aims to give an intuition of whether the statistical model will capture what the user wants see in the data. 
+For example, in the case of a study with intensive longitudinal data, the user might expect to see change. This package aims to show how e.g., a VAR model would not be able to reflect this expectation.
+
+
+# Running AssumptionPlotter
+
+The first step after installing the package is to run the function `run.plotter()`.
+
+```{r, eval=F}
+run.plotter()
+```
+
+
+# TO ADD
+
+::: {layout-ncol=3}
+
+![1](figures/r1.png)
+
+![2](figures/r2.png)
+
+
+![3](figures/r3.png)
+
+![4](figures/r4.png)
+
+![5](figures/r5.png)
+
+![6](figures/r6.png)
+
+
+![7](figures/r7.png)
+
+![8](figures/r8.png)
+
+![9](figures/r9.png)
+
+![10](figures/r10.png)
+
+![11](figures/r11.png)
+
+![12](figures/r12.png)
+
+![13](figures/r13.png)
+
+![14](figures/r14.png)
+
+![15](figures/r15.png)
+
+
+![16](figures/r16.png)
+
+![17](figures/r17.png)
+
+
+:::
