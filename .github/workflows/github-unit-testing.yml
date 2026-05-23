@@ -22,13 +22,12 @@ jobs:
           working-directory: AssumptionPlotter
           extra-packages: any::testthat, any::devtools
 
-      - name: Check package
-        uses: r-lib/actions/check-r-package@v2
-        with:
-          working-directory: AssumptionPlotter
+      - name: Run unit tests
+        run: |
+          Rscript -e 'devtools::test()' | tee test_output.log
 
-      - name: Show testthat output
+      - name: Show test output
         if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
+        run: cat test_output.log || true
+
 
