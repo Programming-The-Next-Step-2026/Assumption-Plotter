@@ -9,10 +9,6 @@ jobs:
   run-unit-tests:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: AssumptionPlotter
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,9 +20,15 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           working-directory: AssumptionPlotter
+          extra-packages: any::testthat, any::devtools
 
       - name: Check package
         uses: r-lib/actions/check-r-package@v2
         with:
           working-directory: AssumptionPlotter
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
 
