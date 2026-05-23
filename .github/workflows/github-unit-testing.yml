@@ -24,8 +24,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           working-directory: AssumptionPlotter
-          extra-packages: any::testthat, any::devtools
 
-      - name: Run unit tests
-        run: Rscript -e 'devtools::test()'
+      - name: Check package
+        uses: r-lib/actions/check-r-package@v2
 
