@@ -27,7 +27,6 @@ jobs:
           extra-packages: any::testthat, any::devtools
 
       - name: Run unit tests
-        run: Rscript -e 'devtools::test()'
         run: |
           Rscript -e 'devtools::test()'
           echo "### UNIT TESTS COMPLETED" >> $GITHUB_STEP_SUMMARY
