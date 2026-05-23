@@ -9,6 +9,10 @@ jobs:
   run-unit-tests:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: AssumptionPlotter
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,11 +27,4 @@ jobs:
           extra-packages: any::testthat, any::devtools
 
       - name: Run unit tests
-        run: |
-          Rscript -e 'devtools::test()' | tee test_output.log
-
-      - name: Show test output
-        if: always()
-        run: cat test_output.log || true
-
-
+        run: Rscript -e 'devtools::test()'
