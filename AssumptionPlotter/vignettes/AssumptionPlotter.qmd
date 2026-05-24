@@ -34,6 +34,8 @@ run.plotter()
 
 # TO ADD
 
+This will all be added before Friday.
+
 ::: {layout-ncol=3}
 
 ![1](figures/r1.png)
