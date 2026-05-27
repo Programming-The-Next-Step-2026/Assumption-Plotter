@@ -1,7 +1,16 @@
 ---
-title: "AssumptionPlotter"
+title: |
+  <img src="figures/logo.png" height="30px" style="vertical-align:middle; margin-right:8px;">
+  <span>AssumptionPlotter</span>
 author: "Emma Akrong"
-date: "May 24, 2026"
+date: "May 29, 2026"
+format:
+  html:
+    theme: simplex
+    css: vignette-style.css
+    toc: true
+    toc-depth: 3
+    toc-location: left
 vignette: >
   %\VignetteIndexEntry{AssumptionPlotter}
   %\VignetteEngine{quarto::html}
@@ -23,7 +32,7 @@ While it tests whether the data matches meets the statistical assumptions of the
 For example, in the case of a study with intensive longitudinal data, the user might expect to see change. This package aims to show how e.g., a VAR model would not be able to reflect this expectation.
 
 
-# Running AssumptionPlotter
+## Running AssumptionPlotter
 
 The first step after installing the package is to run the function `run.plotter()`.
 
@@ -32,7 +41,7 @@ run.plotter()
 ```
 
 
-# TO ADD
+## TO ADD
 
 This will all be added before Friday.
 

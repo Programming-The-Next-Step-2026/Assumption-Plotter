@@ -7,12 +7,12 @@
 #    https://shiny.posit.co/
 #
 
-library(shiny)
-library(AssumptionPlotter)
-library(datasets)
-library(bslib)
-library(DT)
-library(sass)
+# library(shiny)
+# library(AssumptionPlotter)
+# library(datasets)
+# library(bslib)
+# library(DT)
+# library(sass)
 
 # Define UI for application that draws a histogram
 ui <- page_navbar(
@@ -26,7 +26,7 @@ ui <- page_navbar(
     tags$img(src = "logo.png", height = "30px"),
     tags$b("AssumptionPlotter")
   ),
-  bg = "red",
+  bg = "#b22222",
   inverse = TRUE,
   fillable = TRUE,
   theme = bs_theme(

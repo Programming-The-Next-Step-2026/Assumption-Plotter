@@ -1,0 +1,18 @@
+/* Load Merriweather */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+body {
+  font-family: "Merriweather", serif;
+}
+
+/* Red headings */
+h1, h2, h3, h4, h5 {
+  color: #b22222;
+}
+
+/* Red links */
+a {
+  color: #b22222;
+}
+
+

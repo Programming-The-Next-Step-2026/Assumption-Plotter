@@ -18,6 +18,8 @@
 
 edit_df <- function(df, id_col, day_col, exp_day, beep_col, exp_beep, variables){
 
+  time <- numeric()
+
   missing <- data.frame(
     id = c(),
     beeps = numeric(),
@@ -48,12 +50,14 @@ edit_df <- function(df, id_col, day_col, exp_day, beep_col, exp_beep, variables)
 
     missing <- rbind(missing, add)
 
+    time <- c(time,1:nrow(sub_df))
+
   }
 
 
   new_df <- data.frame(
     ID = df[,id_col],
-    time = 1:nrow(df),
+    time = time,
     day = df[,day_col],
     beep = df[,beep_col]
   )
@@ -64,15 +68,9 @@ edit_df <- function(df, id_col, day_col, exp_day, beep_col, exp_beep, variables)
     new_df[new_var[i]] <- df[[variables[i]]]
   }
 
-  return(missing)
-  #return(new_df)
-  #print(missing)
+
+  dfs <- list(new_df, missing)
+  return(dfs)
 
 }
 
-buu <- data.frame(x=1:10, y=letters[1:10])
-buu[h[1]] <- 36:45
-
-buu[[h[1]]]
-
-mode(lu[,2:3])
