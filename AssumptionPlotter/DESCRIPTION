@@ -25,3 +25,5 @@ Imports:
     testthat,
     usethis
 VignetteBuilder: quarto
+Depends: 
+    R (>= 3.5)
