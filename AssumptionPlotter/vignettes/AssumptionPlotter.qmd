@@ -21,7 +21,7 @@ knitr:
     comment: '#>'
 ---
 
-```{r}
+```{r, eval=F}
 #| label: setup
 library(AssumptionPlotter)
 ```

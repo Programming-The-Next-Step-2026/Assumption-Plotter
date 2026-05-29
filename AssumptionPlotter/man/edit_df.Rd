@@ -32,6 +32,13 @@ This function edits the data files (from openESM). Technically, the openesm::get
 }
 \examples{
 \dontrun{
-read_openESM_data("0022_menghini_ts", "https://zenodo.org/records/17347538/files/0022_menghini_ts.tsv?download=1")
+
+"menghini_2023_orig" <- readr::read_tsv("https://zenodo.org/records/17347538/files/0022_menghini_ts.tsv?download=1")
+names <- colnames(menghini_2023_orig)[c(9:17,22:28)]
+menghini <- edit_df(df = menghini_2023_orig, id_col = 1, day_col = 3, exp_day = 3, beep_col = 5, exp_beep = 7, variables = names)
+menghini_2023 <- menghini[[1]]
+usethis::use_data(menghini_2023)
+missing_menghini_2023 <- menghini[[2]]
+usethis::use_data(missing_menghini_2023)
 }
 }
