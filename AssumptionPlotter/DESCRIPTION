@@ -1,28 +1,39 @@
 Package: AssumptionPlotter
 Type: Package
-Title: Assumption Plotter
+Title: AssumptionPlotter
 Version: 0.1.0
 Authors@R: c(
     person(
       "Emma", "Akrong",
-      email = "emma.akrong@student.uva.nl",
+      email = "emma.akrong@gmail.com",
       role = c("aut", "cre")
     )
   )
-Description: This package attempt to provide an intuitive visualization of whether
-    the user's dataset meets the assumptions of statistical models, as well as 
-    whether a statistical model is expected to capture what the user wants 
-    the model to capture.  
+Description: This package creates an app that allows for visual inspection of 
+    EMA/ESM data. The purpose is to give EMA/ESM researchers a nice overview of 
+    what their data looks like, and possibly guide decisions on what statistical 
+    model to use. It was developed with the datasets from openESM in mind, and 
+    can currently plot built-in datasets, the users own data, and data from 
+    openESM accessed through the link to download the tsv file in its dedicated 
+    Zenodo page.
 License: 
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3
 Imports: 
+    bslib,
+    dplyr,
+    DT,
     ggplot2,
+    grDevices,
     knitr,
     quarto,
+    readr,
+    sass,
+    shiny,
     testthat,
+    tidyr,
     usethis
 VignetteBuilder: quarto
 Depends: 
