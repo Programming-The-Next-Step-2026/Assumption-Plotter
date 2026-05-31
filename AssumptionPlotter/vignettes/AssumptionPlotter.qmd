@@ -100,7 +100,7 @@ run_plotter()
 
 This will launch the app and take you to the start page:
 
-![](figures/start_page.png){style="width:40%;"}
+![](figures/start_page.png){style="width:100%;"}
 
 It is recommended that you use the app in full-screen mode as some features (e.g., the table in the data page) otherwise might be hidden. Also note that if you're running the app in RStudio, blank screens might pop up when you press a hyperlink. This does not happen when you run it in your browser.
 
@@ -119,7 +119,7 @@ In the "Data" page you have a few options. You can use the built in datasets, up
 
 To familiarise yourself with the app, you can choose one of the built-in datasets.
 
-![](figures/data_builtin.png){style="width:30%;"}
+![](figures/data_builtin.png){style="width:100%;"}
 
 These datasets were chosen at random and are by no means perfect. However, they can for example highlight how messy the data is (e.g., in `geschwind_2013` most participants have no data in the last days, although it's indicated that there should be 10 days).
 
@@ -145,11 +145,11 @@ When you're happy, you can move to the Plot page.
 
 The final option is to upload the data using the dataset's download file, which can be found in Zenodo. An example link is circled in green:
 
-![](figures/data_zenodo.png){style="width:70%;"}
+![](figures/data_zenodo.png){style="width:100%;"}
 
 To access the link you will have to take a few actions. Start in the data's dedicated openESM page and follow the following steps:
 
-![](figures/openESM_zenodo.png){style="width:90%;"}
+![](figures/openESM_zenodo.png){style="width:100%;"}
 
 On this page you can find the expected days and beeps (circled on the right). 
 
@@ -157,15 +157,15 @@ If you scroll down a bit, you will also find the names of the variables (columns
 
 Fill in all required information in the app and then press the Zenodo DOI link.
 
-![](figures/openESM_vars.png)
+![](figures/openESM_vars.png){style="width:100%;"}
 
 Pressing the Zenodo DOI link should show you the downloadable files. Make sure to not pick the raw or static files, but the one circled in red.
 
-![](figures/zenodo_data.png)
+![](figures/zenodo_data.png){style="width:100%;"}
 
 Then access the link by right clicking, copy the link address, and paste the link to the app. 
 
-![](figures/zenodo_copy_link.png)
+![](figures/zenodo_copy_link.png){style="width:100%;"}
 
 Note that this doesn't work for all data. For example, in the development, I could not get "0011_kuppens" to work.
 
@@ -176,7 +176,7 @@ If the data previews successfully. you can move on to plotting.
 
 When you move to the plot tab, you should see all the variables plotted per day and beep in the Assumption Plot. 
 
-![](figures/plot_start.png)
+![](figures/plot_start.png){style="width:100%;"}
 
 A connected line indicates that the participant responded to consecutive beeps. If there is only a dot, it means that the beep was not preceded nor followed by a response. There should be data at every beep. If a beep is empty, this indicates missing data.
 
@@ -204,7 +204,7 @@ If you're curious about a summary of the missing values, you can press the "*See
 
 The "*Summary*" page starts with some tips for what to look for in the Assumption Plot in the "*Plot*" page. This could be next to the plot, but I wanted to make the plot as big as possible.
 
-![](figures/summary_page.png)
+![](figures/summary_page.png){style="width:100%;"}
 
 Next, you will see a pie and bar chart showing the ratio of included to missing data for the selected participant. When navigating from the "*Plot*" page to the "*Summary*" page, it will remember what participant and font should be plotted. However, if you change the participant in the "*Summary*" page and then move back to the "*Plot*", you'll have to manually change it again for the Assumption Plot. 
 
