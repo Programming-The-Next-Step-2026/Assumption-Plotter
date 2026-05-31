@@ -100,7 +100,7 @@ run_plotter()
 
 This will launch the app and take you to the start page:
 
-![](figures/start_page.png){width = 400 px}
+![](figures/start_page.png){style="width:40%;"}
 
 It is recommended that you use the app in full-screen mode as some features (e.g., the table in the data page) otherwise might be hidden. Also note that if you're running the app in RStudio, blank screens might pop up when you press a hyperlink. This does not happen when you run it in your browser.
 
@@ -119,7 +119,7 @@ In the "Data" page you have a few options. You can use the built in datasets, up
 
 To familiarise yourself with the app, you can choose one of the built-in datasets.
 
-![](figures/data_builtin.png){width = 100%}
+![](figures/data_builtin.png){style="width:30%;"}
 
 These datasets were chosen at random and are by no means perfect. However, they can for example highlight how messy the data is (e.g., in `geschwind_2013` most participants have no data in the last days, although it's indicated that there should be 10 days).
 
@@ -132,7 +132,7 @@ You can then press the "*Plot your data*" button.
 
 By choosing "*Upload your own data*", you will be instructed to follow a few steps:
 
-![](figures/data_upload.png)
+![](figures/data_upload.png){style="width:100%;"}
 
 `clean_df()` that cleans the data for the plotting functions, requires you to input the name of the id, day, and beep column (the pre-filled names are "id", "day", and "beep"). As well as how many days and beeps per day each participant should have. You also need to manually fill in the names of all the variables you want to plot. 
 
@@ -145,11 +145,11 @@ When you're happy, you can move to the Plot page.
 
 The final option is to upload the data using the dataset's download file, which can be found in Zenodo. An example link is circled in green:
 
-![](figures/data_zenodo.png)
+![](figures/data_zenodo.png){style="width:70%;"}
 
 To access the link you will have to take a few actions. Start in the data's dedicated openESM page and follow the following steps:
 
-![](figures/openESM_zenodo.png)
+![](figures/openESM_zenodo.png){style="width:90%;"}
 
 On this page you can find the expected days and beeps (circled on the right). 
 
