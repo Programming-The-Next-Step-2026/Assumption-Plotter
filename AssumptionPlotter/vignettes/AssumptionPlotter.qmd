@@ -100,7 +100,7 @@ run_plotter()
 
 This will launch the app and take you to the start page:
 
-![](figures/start_page.png)
+![](figures/start_page.png){width = 400 px}
 
 It is recommended that you use the app in full-screen mode as some features (e.g., the table in the data page) otherwise might be hidden. Also note that if you're running the app in RStudio, blank screens might pop up when you press a hyperlink. This does not happen when you run it in your browser.
 
@@ -119,7 +119,7 @@ In the "Data" page you have a few options. You can use the built in datasets, up
 
 To familiarise yourself with the app, you can choose one of the built-in datasets.
 
-![](figures/data_builtin.png)
+![](figures/data_builtin.png){width = 100%}
 
 These datasets were chosen at random and are by no means perfect. However, they can for example highlight how messy the data is (e.g., in `geschwind_2013` most participants have no data in the last days, although it's indicated that there should be 10 days).
 
