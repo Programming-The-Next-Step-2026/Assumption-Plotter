@@ -50,9 +50,9 @@ ui <- bslib::page_navbar(
                           # also opens a blank window. Doesn't happen when ran
                           # from browser.
 
-                          "in mind.")
-
-                        ,
+                          "in mind."),
+                   p("App is recommended to be used in full-screen mode as some
+                   features otherwise might be hidden."),
                    # Button to easily transport you to the data page
                    actionButton(
                      inputId= "go_data",

@@ -1,4 +1,18 @@
-#' @importFrom dplyr group_by summarise desc slice_head slice_tail
+#' Create table that ranks participants after number of missing values
+#'
+#' @details
+#' This function creates the table in the summary tab. It shows the participants
+#' with the most and least missing values and the sum and proportion of these
+#' missing values.
+#' @param df Data frame that has been cleaned with clean_df().
+#' @param show How many rows the table should have.
+#' @return Table showing the participants with most and least missing values.
+#' @import dplyr
+#' @export
+#' @examples
+#' \dontrun{
+#' rank_participants(menghini_2013, 5)
+#' }
 
 
 rank_participants <- function(df, show = 5){
@@ -7,8 +21,8 @@ rank_participants <- function(df, show = 5){
   df <- df[,keep_cols]
 
   df <- df %>%
-    dplyr::group_by(id) %>%
-    dplyr::summarise(
+    group_by(id) %>%
+    summarise(
       missing_sum = sum(missing, na.rm = TRUE),
       missing_prop = mean(missing, na.rm = TRUE)
     ) %>%
