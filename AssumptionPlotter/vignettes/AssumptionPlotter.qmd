@@ -81,7 +81,6 @@ To install the package, run this code in your console:
 
 ```{r, eval=FALSE}
 remotes::install_github("Programming-The-Next-Step-2026/Assumption-Plotter",
-               ref = "week-4",
                subdir = "AssumptionPlotter",
                build_manual = TRUE,
                build_vignettes = TRUE)
