@@ -1,3 +1,5 @@
+# AssumptionPlotter
+
 At the moment, this package creates an app that allows for visual inspection of EMA/ESM data.
 
 The package was developed with the datasets from openESM in mind, and can currently plot built-in datasets, the users own data, and data from openESM accessed through the link to download the dataset from its dedicated Zenodo page. However, the last option is not guaranteed to work.
