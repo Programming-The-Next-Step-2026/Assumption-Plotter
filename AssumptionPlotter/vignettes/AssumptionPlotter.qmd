@@ -43,6 +43,7 @@ run.plotter()
 
 ## TO ADD
 
+```{r, include=FALSE,eval=FALSE}
 This will all be added before Friday.
 
 ::: {layout-ncol=3}
@@ -86,3 +87,7 @@ This will all be added before Friday.
 
 
 :::
+```
+
+
+

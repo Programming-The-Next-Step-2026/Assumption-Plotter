@@ -6,7 +6,7 @@
 #' @import shiny
 #' @import datasets
 #' @import bslib
-#' @import DT
+#' @importFrom DT renderDT DTOutput
 #' @import sass
-#' @import readr
+#' @importFrom readr read_tsv read_csv
 NULL

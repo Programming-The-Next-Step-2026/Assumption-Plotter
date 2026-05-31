@@ -1,5 +1,5 @@
 #############################################################################
-#                              USER INTERFACE                               #
+#                            OLD  USER INTERFACE                               #
 #############################################################################
 
 
@@ -10,7 +10,6 @@ ui <- bslib::page_navbar(
     tags$img(src = "logo.png", height = "30px"), # logo is CC0
     tags$b("AssumptionPlotter")),
   bg = "#b22222",
-  inverse = TRUE,
   fillable = TRUE,
 
   # Edit font style
@@ -94,54 +93,54 @@ ui <- bslib::page_navbar(
 
                        # Plotting options
 
-                       ## Participant defined in server
-                       uiOutput("participant_ui"),
+                       # ## Participant defined in server
+                       # uiOutput("participant_ui"),
+                       #
+                       # ## Variables defined in server
+                       # uiOutput("variable_ui"),
+                       #
+                       # ### Option to select all variables
+                       # actionButton(
+                       #   inputId = "all_vars",
+                       #   label = "Select all"),
+                       #
+                       # ### Option to deselect all variables
+                       # actionButton(
+                       #   inputId = "clear_vars",
+                       #   label = "Deselect all"),
+                       #
+                       # ## Trend line: create input for assumption_plot()
+                       # checkboxInput(
+                       #   inputId = "add_trend",
+                       #   label = "Show trend line",
+                       #   value = FALSE), # default
 
-                       ## Variables defined in server
-                       uiOutput("variable_ui"),
-
-                       ### Option to select all variables
-                       actionButton(
-                         inputId = "all_vars",
-                         label = "Select all"),
-
-                       ### Option to deselect all variables
-                       actionButton(
-                         inputId = "clear_vars",
-                         label = "Deselect all"),
-
-                       ## Trend line: create input for assumption_plot()
-                       checkboxInput(
-                         inputId = "add_trend",
-                         label = "Show trend line",
-                         value = FALSE), # default
-
-                       ### If trend line included, what kind
-                       conditionalPanel(
-                         condition = "input.add_trend == true",
-                         selectInput(
-                           inputId = "trend_type",
-                           label = "Trend line type",
-                           choices = c("lm", "loess"),
-                           selected = "lm")),
-
-                       ## Only show imputation options if you want to impute
-                       ### (This is made a bit clumsily, might make sense to
-                       ### change this in both the plotting function and here.
-                       ### Currently an extra step needs to be taken in the server.)
-                       checkboxInput(
-                         inputId = "impute_toggle",
-                         label = "Impute missing data",
-                         value = FALSE), # default
-
-                       conditionalPanel(
-                         condition = "input.impute_toggle == true",
-
-                         selectInput(
-                           inputId = "impute_method",
-                           label = "Imputation method",
-                           choices = c("mean", "mode"),
-                           selected = "mean")),
+                       # ### If trend line included, what kind
+                       # conditionalPanel(
+                       #   condition = "input.add_trend == true",
+                       #   selectInput(
+                       #     inputId = "trend_type",
+                       #     label = "Trend line type",
+                       #     choices = c("lm", "loess"),
+                       #     selected = "lm")),
+                       #
+                       # ## Only show imputation options if you want to impute
+                       # ### (This is made a bit clumsily, might make sense to
+                       # ### change this in both the plotting function and here.
+                       # ### Currently an extra step needs to be taken in the server.)
+                       # checkboxInput(
+                       #   inputId = "impute_toggle",
+                       #   label = "Impute missing data",
+                       #   value = FALSE), # default
+                       #
+                       # conditionalPanel(
+                       #   condition = "input.impute_toggle == true",
+                       #
+                       #   selectInput(
+                       #     inputId = "impute_method",
+                       #     label = "Imputation method",
+                       #     choices = c("mean", "mode"),
+                       #     selected = "mean")),
 
                        hr(), # add horizontal line
 
@@ -213,7 +212,7 @@ ui <- bslib::page_navbar(
 
                        # Plot tab
                        bslib::nav_panel(title = "Assumption Plot",
-                                        plotOutput("assumption_plot")
+                                        # plotOutput("assumption_plot")
                        ),
 
                        # Summary tab
@@ -227,26 +226,28 @@ ui <- bslib::page_navbar(
                                  </ol>
                                              "),
                                         HTML("
-                                             <b>Ratio of Missing Data:<b>
-                                             "),
-
-                                        # Choose whether to plot all
-                                        checkboxInput(
-                                          inputId = "plot_all",
-                                          label = "Show missing values of full dataset",
-                                          value = FALSE),
-
-                                        # Render Plots
-                                        bslib::layout_columns(
-                                          plotOutput("pie_chart"),
-                                          plotOutput("bar_chart"))
+                                             <b>Ratio of Missing Data:</b>
+                                             ")
+                                      #   ,
+                                      #
+                                      #   # Choose whether to plot all
+                                      #   checkboxInput(
+                                      #     inputId = "plot_all",
+                                      #     label = "Show missing values of full dataset",
+                                      #     value = FALSE),
+                                      #
+                                      #   # Render Plots
+                                      #   bslib::layout_columns(
+                                      #     plotOutput("pie_chart"),
+                                      #     plotOutput("bar_chart"))
+                                      #
                                       )
                      ),
 
                      # Navigate back to data tab
-                     # actionButton(
-                     #   inputId = "go_back",
-                     #   label = "Back to data")
+                     actionButton(
+                       inputId = "go_back",
+                       label = "Back to data")
                    )
   ),
 
@@ -273,7 +274,7 @@ ui <- bslib::page_navbar(
 
 
 #############################################################################
-#                                  SERVER                                   #
+#                          OLD        SERVER                                   #
 #############################################################################
 
 server <- function(input, output, session) {
@@ -522,78 +523,78 @@ server <- function(input, output, session) {
 
 
   # Create Assumption plot
-  output$assumption_plot <- renderPlot({
-
-    # req(plot_data_reactive())
-    req(input$participant)
-
-    df <- plot_data_reactive()
-
-
-    assumption_plot(
-      df = df,
-      participant = input$participant,
-      variables = input$variables,
-      expected_days = max(df$day),
-      beeps_per_day = max(df$beep),
-      include_day = input$day_label,
-      include_day_line = input$day_lines,
-      impute = if (isTRUE(input$impute_toggle)) input$impute_method else "none",
-      add_trend = input$add_trend,
-      trend_type = input$trend_type,
-      theme_choice = input$theme_choice,
-      palette = ifelse(!input$edit_palette, "none","custom"),
-      palette_option = input$palette_option,
-      text_font = input$text_font,
-      axis_text_size = input$axis_size,
-      legend_text_size = input$legend_size
-    )
-
-  })
-
-
-  # Create pie chart of missing values
-  output$pie_chart <- renderPlot({
-
-    # req(plot_data_reactive())
-    req(input$participant)
-
-    df <- plot_data_reactive()
-
-    pie_bar_chart(
-      df = df,
-      participant = input$participant,
-      type = "pie",
-      plot_all = input$plot_all,
-      text_font = input$text_font,
-      axis_text_size = input$axis_size,
-      legend_text_size = input$legend_size,
-      theme_choice = input$theme_choice
-    )
-
-  })
+  # output$assumption_plot <- renderPlot({
+  #
+  #   # req(plot_data_reactive())
+  #   req(input$participant)
+  #
+  #   df <- plot_data_reactive()
+  #
+  #
+  #   assumption_plot(
+  #     df = df,
+  #     participant = input$participant,
+  #     variables = input$variables,
+  #     expected_days = max(df$day),
+  #     beeps_per_day = max(df$beep),
+  #     include_day = input$day_label,
+  #     include_day_line = input$day_lines,
+  #     impute = if (isTRUE(input$impute_toggle)) input$impute_method else "none",
+  #     add_trend = input$add_trend,
+  #     trend_type = input$trend_type,
+  #     theme_choice = input$theme_choice,
+  #     palette = ifelse(!input$edit_palette, "none","custom"),
+  #     palette_option = input$palette_option,
+  #     text_font = input$text_font,
+  #     axis_text_size = input$axis_size,
+  #     legend_text_size = input$legend_size
+  #   )
+  #
+  # })
 
 
-  # Create bar chart of missing values
-  output$bar_chart <- renderPlot({
-
-    # req(plot_data_reactive())
-    req(input$participant)
-
-    df <- plot_data_reactive()
-
-    pie_bar_chart(
-      df = df,
-      participant = input$participant,
-      type = "bar",
-      plot_all = input$plot_all,
-      text_font = input$text_font,
-      axis_text_size = input$axis_size,
-      legend_text_size = input$legend_size,
-      theme_choice = input$theme_choice
-    )
-
-  })
+  # # Create pie chart of missing values
+  # output$pie_chart <- renderPlot({
+  #
+  #   # req(plot_data_reactive())
+  #   req(input$participant)
+  #
+  #   df <- plot_data_reactive()
+  #
+  #   pie_bar_chart(
+  #     df = df,
+  #     participant = input$participant,
+  #     type = "pie",
+  #     plot_all = input$plot_all,
+  #     text_font = input$text_font,
+  #     axis_text_size = input$axis_size,
+  #     legend_text_size = input$legend_size,
+  #     theme_choice = input$theme_choice
+  #   )
+  #
+  # })
+  #
+  #
+  # # Create bar chart of missing values
+  # output$bar_chart <- renderPlot({
+  #
+  #   # req(plot_data_reactive())
+  #   req(input$participant)
+  #
+  #   df <- plot_data_reactive()
+  #
+  #   pie_bar_chart(
+  #     df = df,
+  #     participant = input$participant,
+  #     type = "bar",
+  #     plot_all = input$plot_all,
+  #     text_font = input$text_font,
+  #     axis_text_size = input$axis_size,
+  #     legend_text_size = input$legend_size,
+  #     theme_choice = input$theme_choice
+  #   )
+  #
+  # })
 
   # To data from plot tab
   observeEvent(input$go_back, {
