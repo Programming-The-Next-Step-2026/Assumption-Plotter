@@ -18,7 +18,10 @@ ui <- bslib::page_navbar(
   ),
 
 
+  # First tab: Start page
   bslib::nav_panel(title = "Start",
+
+                   # Welcome message
                    HTML("
               <p> <b>Welcome to AssumptionPlotter!</b></p>
 
@@ -59,6 +62,7 @@ ui <- bslib::page_navbar(
 
 
 
+  # Second tab: Data page
   bslib::nav_panel(title = "Data",
                    # Choose what data you want to use
                    radioButtons(
@@ -88,12 +92,17 @@ ui <- bslib::page_navbar(
                    ), # End data page
 
 
+  # Third tab: Plotting page
   bslib::nav_panel(title = "Plot",
+
+                   # Create sidebar and main content field
                    bslib::layout_sidebar(
+
+                     # start sidebar (options)
                      sidebar = bslib::sidebar(
                        HTML("Options"),
-                       # Plotting options
 
+                       # Plotting options
                        ## Participant defined in server
                        uiOutput("participant_ui"),
 
@@ -126,7 +135,7 @@ ui <- bslib::page_navbar(
                            selected = "lm")),
 
                        ## Only show imputation options if you want to impute
-                       ### (This is made a bit clumsily, might make sense to
+                       ### (This is made a bit clumsily. Might make sense to
                        ### change this in both the plotting function and here.
                        ### Currently an extra step needs to be taken in the server.)
                        checkboxInput(
@@ -145,29 +154,29 @@ ui <- bslib::page_navbar(
 
                        hr(), # add horizontal line
 
-                       # Day label and lines
-                       ## Label
+                       ## Day label and lines
+                       ### Label
                        checkboxInput(
                          inputId = "day_label",
                          label = "Include day labels",
                          value = TRUE), # default
 
-                       ## Lines
+                       ### Lines
                        checkboxInput(
                          inputId = "day_lines",
                          label = "Include day lines",
                          value = TRUE), # default
 
-                       ## Edit colors?
+                       ## Edit color palettes
                        checkboxInput(
                          inputId = "edit_palette",
-                         label = "Edit plot colors",
+                         label = "Edit color palette",
                          value = FALSE),
 
                        conditionalPanel(
                          condition = "input.edit_palette == true",
 
-                         # Choose which theme
+                         ### Choose which palette
                          selectInput(
                            inputId = "palette_option",
                            label = "Choose palette",
@@ -181,15 +190,15 @@ ui <- bslib::page_navbar(
                          choices = c("classic", "minimal", "bw", "dark"),
                          selected = "classic" ),
 
-                       # Choose font
+                       ## Choose font
                        selectInput(
                          inputId = "text_font",
                          label = "Font family",
                          choices = c("sans", "serif", "mono"),
                          selected = "sans"),
 
-                       # Edit font sizes
-                       ## Axis
+                       ## Edit font sizes
+                       ### Axis
                        sliderInput(
                          inputId = "axis_size",
                          label = "Axis text size",
@@ -197,7 +206,7 @@ ui <- bslib::page_navbar(
                          max = 30,
                          value = 14),
 
-                       ## Legend
+                       ### Legend
                        sliderInput(
                          inputId = "legend_size",
                          label = "Legend text size",
@@ -205,13 +214,16 @@ ui <- bslib::page_navbar(
                          max = 30,
                          value = 14)
 
-                     ), # End of options
+                     ), # End of options (sidebar)
 
+
+                     # Start plot page main content
 
                      HTML("<b>Assumption Plot</b>"),
                      plotOutput("assumption_plot")
 
-                   ),
+                   ), # end of layout_sidebar
+
                    # Navigate back to data tab
                    actionButton(
                      inputId = "go_summary",
@@ -221,23 +233,39 @@ ui <- bslib::page_navbar(
 
 
 
+  # Fourth tab: Summary of missing values tab
   bslib::nav_panel(title = "Summary",
+
+                   # Create sidebar and main content field
                    bslib::layout_sidebar(
+
+                     # Start sidebar(options for summary page)
                      sidebar = bslib::sidebar(
-                       HTML("
-                            Options
-                            "),
+                       HTML("Options"),
+
+                       # Plotting options:
+                       ## Participant defined in server
+                       ### Cannot use the same input because it kept on crashing
+                       ### for me. However, after identifying the real bug,
+                       ### (i thought the bug was that it couldn't use the same
+                       ### input$participant for both plots, but in reality I'd
+                       ### just forgotten to close an html tag properly), it
+                       ### might be possible to just use participant_ui here too.
                        uiOutput("participant_ui_summary"),
 
                        # ## Choose theme
                        # ### Not included for now
                        # uiOutput("theme_ui")
 
-                       ## Choose text font
+                       ## Choose text font defined in server because I want the
+                       ## font chosen in the plot page to automatically be
+                       ## applied to the summary plots.
+                       ### same disclaimer about just using text_font as for
+                       ### participant_ui_summary
                        uiOutput("font_ui"),
 
-                       # Edit summary plots font sizes
-                       ## Axis
+                       ## Edit summary plots font sizes
+                       ### Axis
                        sliderInput(
                          inputId = "axis_size_sum",
                          label = "Axis text size",
@@ -245,7 +273,7 @@ ui <- bslib::page_navbar(
                          max = 30,
                          value = 14),
 
-                       ## Legend
+                       ### Legend
                        sliderInput(
                          inputId = "legend_size_sum",
                          label = "Legend text size",
@@ -259,6 +287,7 @@ ui <- bslib::page_navbar(
 
 
                      # Start layout_sidebar content
+
                      HTML("
                                  <b>Tips of what to look for in 'Assumption Plot':</b>
                                  <ol>
@@ -267,7 +296,10 @@ ui <- bslib::page_navbar(
                                  <li>Does the data remain stationary?</li>
                                  </ol>
                                              "),
+
+
                      p(HTML("<b>Ratio of Missing Data:</b>")),
+
                        # Choose whether to plot all
                        checkboxInput(
                          inputId = "plot_all",
@@ -277,7 +309,35 @@ ui <- bslib::page_navbar(
                        # Render Plots
                        bslib::layout_columns(
                          plotOutput("pie_chart"),
-                         plotOutput("bar_chart"))
+                         plotOutput("bar_chart")),
+
+                     # How many rows to show in the following table
+                     ## Custom style to get label to appear next to input
+                     ## Needed to create more space
+                     div(
+                       style = "display: flex; align-items: center; gap: 10px;",
+
+                       tags$label("Rows:"),
+
+                       numericInput(
+                         inputId = "show_id_table",
+                         label = NULL,
+                         value = 5,
+                         min = 1,
+                         max = 100)
+                     ),
+
+                     # Create card for top and bottom participants table
+                     bslib::card(
+                       max_height = 200,
+                       full_screen = TRUE,
+                       bslib::card_header("Participants with most and least
+                                          missing values"),
+
+                       # Table in server
+                       tableOutput("rank_table")
+
+                     )
 
 
                    ), # End layout_sidebar
@@ -309,7 +369,7 @@ ui <- bslib::page_navbar(
              href = "https://github.com/Programming-The-Next-Step-2026/Assumption-Plotter",
              target = "_blank")
     )
-  ) # End navigation bar
+  ) # End navigation menu
 
 )
 
@@ -631,22 +691,6 @@ server <- function(input, output, session){
   })
 
 
-  ## Choose participant for summary charts
-  output$participant_ui_summary <- renderUI({
-
-    req(plot_data_reactive())
-
-    df <- plot_data_reactive()
-
-    selectInput(
-      "participant_sum", # selection can be accesses through input$participant
-      "Participant",
-      choices = unique(df$id), # shows all participant
-      selected = input$participant
-    )
-
-  })
-
   ## Choose variables
   output$variable_ui <- renderUI({
 
@@ -735,18 +779,22 @@ server <- function(input, output, session){
 
 
   # Choose variables for pie and bar charts
-  # (using the same ones as for the assumption plot caused failure)
+  ## Choose participant for summary charts
+  ## See note about why input$participant isn't used in the ui
+  output$participant_ui_summary <- renderUI({
 
-  # ## Theme
-  # ### Can be included but for simplicity, I am not, for now.
-  #
-  # output$theme_ui <- renderUI({
-  #   selectInput(
-  #     inputId = "theme_choice",
-  #     label = "Theme",
-  #     choices = c("classic", "minimal", "bw", "dark"),
-  #     selected = input$theme_choice)
-  # })
+    req(plot_data_reactive())
+
+    df <- plot_data_reactive()
+
+    selectInput(
+      "participant_sum", # selection can be accesses through input$participant
+      "Participant",
+      choices = unique(df$id), # shows all participant
+      selected = input$participant
+    )
+
+  })
 
   ## Font style
   output$font_ui <- renderUI({
@@ -755,6 +803,16 @@ server <- function(input, output, session){
       label = "Font family",
       choices = c("sans", "serif", "mono"),
       selected = input$text_font)
+  })
+
+  output$rank_table <- renderTable({
+    req(plot_data_reactive())
+
+    rank_df <- rank_participants(
+      df = plot_data_reactive(),
+      show = input$show_id_table
+    )
+
   })
 
 

@@ -72,6 +72,8 @@ assumption_plot <- function(
   }
 
   # Subset data
+  ## In the future it would be cool to implement the option to plot multiple
+  ## participants at once (so you can compare them).
   df <- df %>%
     filter(id == participant)
 
@@ -309,22 +311,22 @@ pie_bar_chart <- function(df,
   # Keep relevant variables
   missing <- df$missing
 
-  # Create group variable
-  status <- ifelse(missing=="TRUE", "Missing", "Included")
-
 
   # Make df
   plot_df <- data.frame(
-    Status <- status,
-    Missing <- missing
+    Missing = missing
   )
+
+  plot_df <- df %>%
+    mutate(Status = ifelse(missing, "Missing", "Included")) %>%
+    dplyr::count(Status)
 
 
   # Create different types of plots
   if(type == "pie"){
 
     p <-
-      ggplot(plot_df, aes(x = "", y = Missing, fill = Status)) +
+      ggplot(plot_df, aes(x = "", y = n, fill = Status)) +
       geom_bar(stat = "identity", width = 1) +
       coord_polar("y", start = 0)+
       scale_fill_manual(values =
@@ -337,8 +339,8 @@ pie_bar_chart <- function(df,
       )
   } else if(type == "bar"){
     p <-
-      ggplot(plot_df, aes(Status, fill=Status)) +
-      geom_bar() +
+      ggplot(plot_df, aes(x = Status, y = n, fill = Status)) +
+      geom_col() +
       xlab("Data points")+
       ylab("Count")+
       scale_fill_manual(values =
@@ -368,5 +370,7 @@ pie_bar_chart <- function(df,
   }
 
   return(p)
+
 }
+
 
