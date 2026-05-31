@@ -16,7 +16,6 @@ Description: This package creates an app that allows for visual inspection of
     can currently plot built-in datasets, the users own data, and data from 
     openESM accessed through the link to download the tsv file in its dedicated 
     Zenodo page.
-
 License: 
 Encoding: UTF-8
 LazyData: true
